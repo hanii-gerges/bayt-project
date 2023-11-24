@@ -13,6 +13,10 @@
                 <h6 class="m-0 font-weight-bold text-primary">{{ __('Users Table') }}</h6>
             </div>
             <div class="card-body">
+
+                <!-- Create User Button -->
+                <a href="{{ route('users.create') }}" class="btn btn-primary mb-3 float-right">{{ __('Create User') }}</a>
+
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
