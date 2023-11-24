@@ -13,7 +13,7 @@ class UserController extends Controller
     {
         $users = User::paginate();
 
-        return view('users.index', compact('users'));
+        return view('users.index')->with(['users' => $users]);
     }
 
     /**
@@ -37,11 +37,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        $user = User::findOrFail($id);
-
-        return view('users.show')->with($user);
+        return view('users.show')->with(['user' => $user]);
     }
 
     /**
@@ -49,7 +47,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit')->with($user);
+        return view('users.edit')->with(['user' => $user]);
     }
 
     /**

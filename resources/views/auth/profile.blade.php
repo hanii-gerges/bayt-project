@@ -19,7 +19,7 @@
 
                     <div class="card">
 
-                        <form action="{{ route('profile.update') }}" method="POST">
+                        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
@@ -27,8 +27,9 @@
 
                                 <div class="input-group mb-3">
                                     <input type="text" name="name"
-                                           class="form-control @error('name') is-invalid @enderror"
-                                           placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->name) }}" required>
+                                        class="form-control @error('name') is-invalid @enderror"
+                                        placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->name) }}"
+                                        required>
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-user"></span>
@@ -36,15 +37,16 @@
                                     </div>
                                 </div>
                                 @error('name')
-                                <div class="form-group custom-control">
-                                    <label class="">{{ $message }}</label>
-                                </div>
+                                    <div class="form-group custom-control">
+                                        <label class="">{{ $message }}</label>
+                                    </div>
                                 @enderror
 
                                 <div class="input-group mb-3">
                                     <input type="email" name="email"
-                                           class="form-control @error('email') is-invalid @enderror"
-                                           placeholder="{{ __('Email') }}" value="{{ old('email', auth()->user()->email) }}" required>
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        placeholder="{{ __('Email') }}" value="{{ old('email', auth()->user()->email) }}"
+                                        required>
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-envelope"></span>
@@ -52,15 +54,49 @@
                                     </div>
                                 </div>
                                 @error('email')
-                                <div class="form-group custom-control">
-                                    <label class="">{{ $message }}</label>
+                                    <div class="form-group custom-control">
+                                        <label class="">{{ $message }}</label>
+                                    </div>
+                                @enderror
+
+
+
+                                <div class="input-group mb-3">
+                                    <input type="number" name="age"
+                                        class="form-control @error('age') is-invalid @enderror"
+                                        placeholder="{{ __('Age') }}" value="{{ old('age', auth()->user()->age) }}"
+                                        required>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-calendar"></span>
+                                        </div>
+                                    </div>
                                 </div>
+                                @error('age')
+                                    <div class="form-group custom-control">
+                                        <label class="">{{ $message }}</label>
+                                    </div>
+                                @enderror
+
+                                <div class="input-group mb-3">
+                                    <input type="file" name="profile_image"
+                                        class="form-control @error('profile_image') is-invalid @enderror" accept="image/*">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-image"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                @error('profile_image')
+                                    <div class="form-group custom-control">
+                                        <label class="">{{ $message }}</label>
+                                    </div>
                                 @enderror
 
                                 <div class="input-group mb-3">
                                     <input type="password" name="password"
-                                           class="form-control @error('password') is-invalid @enderror"
-                                           placeholder="{{ __('New password') }}">
+                                        class="form-control @error('password') is-invalid @enderror"
+                                        placeholder="{{ __('New password') }}">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-lock"></span>
@@ -68,16 +104,15 @@
                                     </div>
                                 </div>
                                 @error('password')
-                                <div class="form-group custom-control">
-                                    <label class="">{{ $message }}</label>
-                                </div>
+                                    <div class="form-group custom-control">
+                                        <label class="">{{ $message }}</label>
+                                    </div>
                                 @enderror
 
                                 <div class="input-group mb-3">
                                     <input type="password" name="password_confirmation"
-                                           class="form-control @error('password_confirmation') is-invalid @enderror"
-                                           placeholder="{{ __('New password confirmation') }}"
-                                           autocomplete="new-password">
+                                        class="form-control @error('password_confirmation') is-invalid @enderror"
+                                        placeholder="{{ __('New password confirmation') }}" autocomplete="new-password">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span class="fas fa-lock"></span>
@@ -88,13 +123,13 @@
                             </div>
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
                             </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
     </div>
-    <!-- /.content -->
 @endsection
