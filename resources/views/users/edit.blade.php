@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -67,6 +68,27 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            @role('admin')
+                                <div class="form-group row">
+                                    <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+
+                                    <div class="col-md-6">
+                                        <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" required>
+                                            <option value="">Select Role</option>
+                                            @foreach ($roles as $id => $name)
+                                                <option value="{{ $id }}" {{ $id == $user->roles->first()->id ? 'selected' : '' }}>{{ $name }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        @error('role')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            @endrole
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

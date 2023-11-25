@@ -63,20 +63,6 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image">
-
-                                    @error('image')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Age') }}</label>
 
                                 <div class="col-md-6">
@@ -104,10 +90,30 @@
                                 </div>
                             </div>
 
+                            @role('admin')
+                                <div class="form-group row">
+                                    <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+
+                                    <div class="col-md-6">
+                                        <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" required>
+                                            @foreach($roles as $id => $name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        @error('role')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            @endrole
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Submit') }}
+                                        {{ __('Create') }}
                                     </button>
                                 </div>
                             </div>

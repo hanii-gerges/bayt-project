@@ -18,13 +18,18 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group([
+    function () {
     Route::get('/', function () {
         return view('home');
     })->name('home');
 
-    Route::resource('users', UserController::class);
+    // User routes
+    Route::middleware(['role:admin'])->resource('users', UserController::class)->except(['index', 'show']);
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
 
+    // Profile routes
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
-});
+}]);

@@ -6,12 +6,13 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate();
+        $users = User::latest('id')->paginate();
 
         return view('users.index')->with(['users' => $users]);
     }
@@ -21,7 +22,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::pluck('name', 'id');
+
+        return view('users.create')->with(['roles' => $roles]);
     }
 
     /**
@@ -30,6 +33,10 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->validated());
+
+        // Assign role to user.
+        $role = Role::find($request->role);
+        $user->syncRoles($role);
 
         return redirect()->route('users.show', $user->id);
     }
@@ -47,7 +54,13 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit')->with(['user' => $user]);
+        $roles = Role::pluck('name', 'id');
+        $user->load('roles');
+
+        return view('users.edit')->with([
+            'user' => $user,
+            'roles' => $roles,
+        ]);
     }
 
     /**
@@ -56,6 +69,10 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->validated());
+
+        // Assign role to user.
+        $role = Role::find($request->role);
+        $user->syncRoles($role);
 
         return redirect()->route('users.show', $user->id);
     }
