@@ -13,6 +13,17 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'string', 'max:255', Rule::unique('users')->ignore(Auth::user())],
+            'age' => [
+                'required',
+                'integer',
+                'min:18',
+                'max:25',
+            ],
+            'location' => [
+                'required',
+                'string',
+                'max:255'
+            ],
             'password' => ['nullable', 'string', 'confirmed', 'min:8'],
         ];
     }

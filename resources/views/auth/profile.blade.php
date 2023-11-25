@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -59,8 +60,6 @@
                                     </div>
                                 @enderror
 
-
-
                                 <div class="input-group mb-3">
                                     <input type="number" name="age"
                                         class="form-control @error('age') is-invalid @enderror"
@@ -79,15 +78,17 @@
                                 @enderror
 
                                 <div class="input-group mb-3">
-                                    <input type="file" name="profile_image"
-                                        class="form-control @error('profile_image') is-invalid @enderror" accept="image/*">
+                                    <input type="text" name="location"
+                                        class="form-control @error('location') is-invalid @enderror"
+                                        placeholder="{{ __('Location') }}" value="{{ old('location', auth()->user()->location) }}"
+                                        required>
                                     <div class="input-group-append">
                                         <div class="input-group-text">
-                                            <span class="fas fa-image"></span>
+                                            <span class="fas fa-map-marker-alt"></span>
                                         </div>
                                     </div>
                                 </div>
-                                @error('profile_image')
+                                @error('location')
                                     <div class="form-group custom-control">
                                         <label class="">{{ $message }}</label>
                                     </div>
