@@ -124,4 +124,4 @@ An admin user has been seeded with the following credentials:
 - **Email:** admin@bayt.com
 - **Password:** 12345678
 
-Use these credentials to log in as an administrator in your application.
+Use these credentials to log in as an administrator.
